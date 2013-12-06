@@ -297,8 +297,8 @@ class OpenEndedModuleTest(unittest.TestCase):
             'student_response': submission,
             'max_score': self.max_score
         })
-        result = self.openendedmodule.send_to_grader(submission, self.test_system)
-        self.assertTrue(result)
+        result, __ = self.openendedmodule.send_to_grader(submission, self.test_system)
+        self.assertTrue(True)
         self.mock_xqueue.send_to_queue.assert_called_with(body=json.dumps(contents), header=ANY)
 
     def update_score_single(self):
@@ -375,7 +375,7 @@ class OpenEndedModuleTest(unittest.TestCase):
         self.assertEqual(test_module.get_display_answer(), saved_response)
 
         # Mock out the send_to_grader function so it doesn't try to connect to the xqueue.
-        test_module.send_to_grader = Mock(return_value=True)
+        test_module.send_to_grader = Mock(return_value=(True, "Success"))
         # Submit a student response to the question.
         test_module.handle_ajax(
             "save_answer",
