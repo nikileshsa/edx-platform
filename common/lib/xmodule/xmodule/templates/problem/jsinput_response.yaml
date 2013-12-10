@@ -12,6 +12,7 @@ data: |
         The value of answer is the JSON string returned by getGrade
         The value of state is the JSON string returned by getState
         '''
+        par = json.loads(ans)
         # We can use either the value of the answer key to grade
         answer = json.loads(par["answer"])
         return answer["cylinder"] and not answer["cube"]
@@ -37,6 +38,6 @@ data: |
           set_statefn="WebGLDemo.setState"
           width="400"
           height="400"
-         html_file="https://studio.edx.org/c4x/edX/DemoX/asset/webGLDemo.html"/>
+          html_file="//studio.edx.org/c4x/edX/DemoX/asset/webGLDemo.html"/>
       </customresponse>
       </problem>
