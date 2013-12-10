@@ -670,12 +670,18 @@ class StringResponseXMLFactory(ResponseXMLFactory):
 
             *hintfn*: The name of a function in the script to use for hints.
 
+            *regexp*: Whether the response is regexp
+
+            *additional_answers*: list of additional asnwers.
+
         """
         # Retrieve the **kwargs
         answer = kwargs.get("answer", None)
         case_sensitive = kwargs.get("case_sensitive", True)
         hint_list = kwargs.get('hints', None)
         hint_fn = kwargs.get('hintfn', None)
+        regexp = kwargs.get('regexp', None)
+        additional_answers = kwargs.get('additional_answers', [])
         assert answer
 
         # Create the <stringresponse> element
@@ -686,6 +692,9 @@ class StringResponseXMLFactory(ResponseXMLFactory):
 
         # Set the case sensitivity
         response_element.set("type", "cs" if case_sensitive else "ci")
+
+        # Set the regexp
+        response_element.set("regexp", "true") if regexp else None
 
         # Add the hints if specified
         if hint_list or hint_fn:
@@ -706,6 +715,9 @@ class StringResponseXMLFactory(ResponseXMLFactory):
             if hint_fn:
                 assert not hint_list
                 hintgroup_element.set("hintfn", hint_fn)
+
+        for additional_answer in additional_answers:
+            etree.SubElement(response_element, "additional_answer").text = additional_answer
 
         return response_element
 
