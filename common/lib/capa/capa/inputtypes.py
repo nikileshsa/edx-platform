@@ -496,7 +496,9 @@ class JSInput(InputTypeBase):
             Attribute('set_statefn', None),  # Function to call iframe to
                                              #   set state
             Attribute('width', "400"),       # iframe width
-            Attribute('height', "300")       # iframe height
+            Attribute('height', "300"),      # iframe height
+            Attribute('sop', None)           # SOP will be relaxed only if this
+                                             # attribute is set to false.
         ]
 
     def _extra_context(self):
