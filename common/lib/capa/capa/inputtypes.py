@@ -456,11 +456,9 @@ registry.register(JavascriptInput)
 
 class JSInput(InputTypeBase):
     """
-    DO NOT USE! HAS NOT BEEN TESTED BEYOND 700X PROBLEMS, AND MAY CHANGE IN
-    BACKWARDS-INCOMPATIBLE WAYS.
-      Inputtype for general javascript inputs. Intended to be used with
+    Inputtype for general javascript inputs. Intended to be used with
     customresponse.
-      Loads in a sandboxed iframe to help prevent css and js conflicts between
+    Loads in a sandboxed iframe to help prevent css and js conflicts between
     frame and top-level window.
 
     iframe sandbox whitelist:
@@ -478,7 +476,7 @@ class JSInput(InputTypeBase):
                  height="500"
                  width="400"/>
 
-     See the documentation in the /doc/public folder for more information.
+    See the documentation in the /doc/public folder for more information.
     """
 
     template = "jsinput.html"

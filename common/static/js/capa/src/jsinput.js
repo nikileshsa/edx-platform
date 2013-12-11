@@ -1,4 +1,6 @@
-/*
+/* 
+ * ################################# JSCHANNEL #################################
+ *
  * We use JSChannel (https://github.com/mozilla/jschannel) to enable JSInput to
  * call 'gradeFn', and eventually 'stateGetter' & 'stateSetter' in the iframe's
  * content even if it hasn't the same origin, therefore bypassing SOP:
@@ -626,6 +628,12 @@
     };
 })();
 
+/*
+ *
+ * ################################## JSINPUT ##################################
+ *
+ */
+
 (function (jsinput, undefined) {
     // Initialize js inputs on current page.
     // N.B.: No library assumptions about the iframe can be made (including,
@@ -688,7 +696,8 @@
                         find('iframe[name^="iframe_"]').
                         get(0);
         var cWindow = thisIFrame.contentWindow;
-
+        var path = thisIFrame.src.substring(0,
+                                            thisIFrame.src.lastIndexOf("/")+1);
         // Get the hidden input field to pass to customresponse
         function _inputField() {
             var parent = $(spec.elem).parent();
@@ -707,8 +716,8 @@
 
         var channel = Channel.build({
                 window: cWindow,
-                origin: "*", //IMPORTANT, CHANGE THIS TO SPECIFIC DOMAIN!
-                scope: "JSInputScope",
+                origin: path,
+                scope: "JSInput",
                 onReady: function() {
                 }
             });
@@ -721,7 +730,7 @@
                 method: "getGrade",
                 params: "",
                 success: function(val) {
-                    ans = unescape(val.toString());
+                    ans = decodeURI(val.toString());
 
                      // setstate presumes getstate, so don't getstate unless 
                      // setstate is defined.
@@ -731,7 +740,7 @@
                             method: "getState",
                             params: "",
                             success: function(val) {
-                                state = unescape(val).toString();
+                                state = decodeURI(val.toString());
                                 store = {
                                     answer: ans,
                                     state:  state
