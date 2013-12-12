@@ -28,6 +28,8 @@ window.image_input_click = function (id, event) {
         // Chrome, FF: `posX` and `posY` - integers.
         result = '[' + Math.round(posX) + ',' + Math.round(posY) + ']';
 
+    console.log('[image_input_click]: event = ', event);
+
     cross.style.left = (posX - 15) + 'px';
     cross.style.top = (posY - 15) + 'px';
     cross.style.visibility = 'visible';
