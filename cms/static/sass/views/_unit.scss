@@ -1053,7 +1053,7 @@ body.unit {
 
     .subsection,
     .courseware-unit {
-      margin-left: ($baseline);
+      margin: 0 0 ($baseline/10) ($baseline);
     }
 
     .section-item {

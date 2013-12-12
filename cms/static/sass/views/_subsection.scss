@@ -309,6 +309,35 @@
           background: $blue-l5;
         }
       }
+
+      .public-item {
+        color: $black;
+      }
+
+      .private-item {
+        color: $gray-l1;
+      }
+
+      .draft-item {
+        color: $yellow-d1;
+      }
+
+      .draft-item:after,
+      .public-item:after,
+      .private-item:after {
+        @include font-size(9);
+        margin-left: 3px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .draft-item:after {
+        content: "- draft";
+      }
+
+      .private-item:after {
+        content: "- private";
+      }
     }
 
     .actions-list {
