@@ -730,7 +730,7 @@ class OpenEndedModuleXmlTest(unittest.TestCase, DummyModulestore):
         test_system = get_test_system()
         test_system.open_ended_grading_interface = None
         test_system.xqueue['interface'] = Mock(
-            send_to_queue=Mock(side_effect=[1, "queued"])
+            send_to_queue=Mock(return_value=[1, "queued"])
         )
 
         return test_system
@@ -891,7 +891,7 @@ class OpenEndedModuleXmlAttemptTest(unittest.TestCase, DummyModulestore):
         test_system = get_test_system()
         test_system.open_ended_grading_interface = None
         test_system.xqueue['interface'] = Mock(
-            send_to_queue=Mock(side_effect=[1, "queued"])
+            send_to_queue=Mock(return_value=[1, "queued"])
         )
         return test_system
 
@@ -964,7 +964,7 @@ class OpenEndedModuleXmlImageUploadTest(unittest.TestCase, DummyModulestore):
         test_system.open_ended_grading_interface = None
         test_system.s3_interface = test_util_open_ended.S3_INTERFACE
         test_system.xqueue['interface'] = Mock(
-            send_to_queue=Mock(side_effect=[1, "queued"])
+            send_to_queue=Mock(return_value=[1, "queued"])
         )
         return test_system
 
