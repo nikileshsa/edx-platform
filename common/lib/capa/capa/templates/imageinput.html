@@ -10,7 +10,6 @@
 
     <div
         id="imageinput_${id}"
-        onclick="(function (event) { image_input_click('${id}', event); })"
         style="background-image: url('${src}'); width: ${width}px; height: ${height}px; position: relative; left: 0; top: 0;"
     >
         <img
@@ -19,6 +18,10 @@
             style="position: absolute; top: ${gy}px; left: ${gx}px;"
         />
     </div>
+
+    <script type="text/javascript" charset="utf-8">
+        (new ImageInput('${id}'));
+    </script>
 
     % if status == 'unsubmitted':
         <span
