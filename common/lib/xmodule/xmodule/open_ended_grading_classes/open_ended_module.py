@@ -5,6 +5,7 @@ hints, answers, and assessment judgment (currently only correct/incorrect).
 Parses xml definition file--see below for exact format.
 """
 
+from django.utils.translation import ugettext as _
 import json
 import logging
 from lxml import etree
@@ -166,7 +167,7 @@ class OpenEndedModule(openendedchild.OpenEndedChild):
             )
             log.exception(error_message)
             # This is a student_facing_error
-            return {'success': False, 'msg': "There was an error saving your feedback.  Please contact course staff."}
+            return {'success': False, 'msg': _("There was an error saving your feedback. Please contact course staff.")}
 
         xqueue = system.get('xqueue')
         if xqueue is None:
@@ -203,10 +204,10 @@ class OpenEndedModule(openendedchild.OpenEndedChild):
 
         # Convert error to a success value
         success = True
-        message = "Successfully saved your feedback."
+        message = _("Successfully saved your feedback.")
         if error:
             success = False
-            message = "Unable to save your feedback. Please try again later."
+            message = _("Unable to save your feedback. Please try again later.")
         else:
             self.child_state = self.DONE
 
@@ -265,10 +266,10 @@ class OpenEndedModule(openendedchild.OpenEndedChild):
         )
 
         success = True
-        message = "Successfully saved your submission."
+        message = _("Successfully saved your submission.")
         if error:
             success = False
-            message = 'Unable to send your submission to grader. Please try again later.'
+            message = _('Unable to send your submission to grader. Please try again later.')
 
         return (success, message)
 
@@ -391,7 +392,7 @@ class OpenEndedModule(openendedchild.OpenEndedChild):
         for tag in ['success', 'feedback', 'submission_id', 'grader_id']:
             if tag not in response_items:
                 # This is a student_facing_error
-                return format_feedback('errors', 'Error getting feedback from grader.')
+                return format_feedback('errors', _('Error getting feedback from grader.'))
 
         feedback_items = response_items['feedback']
         try:
@@ -400,12 +401,12 @@ class OpenEndedModule(openendedchild.OpenEndedChild):
             # This is a dev_facing_error
             log.exception("feedback_items from external open ended grader have invalid json {0}".format(feedback_items))
             # This is a student_facing_error
-            return format_feedback('errors', 'Error getting feedback from grader.')
+            return format_feedback('errors', _('Error getting feedback from grader.'))
 
         if response_items['success']:
             if len(feedback) == 0:
                 # This is a student_facing_error
-                return format_feedback('errors', 'No feedback available from grader.')
+                return format_feedback('errors', _('No feedback available from grader.'))
 
             for tag in do_not_render:
                 if tag in feedback:
@@ -671,7 +672,7 @@ class OpenEndedModule(openendedchild.OpenEndedChild):
         if self.child_state != self.INITIAL:
             return self.out_of_sync_error(data)
 
-        message = "Successfully saved your submission."
+        message = _("Successfully saved your submission.")
 
         # add new history element with answer and empty score and hint.
         success, error_message, data = self.append_file_link_to_student_answer(data)
@@ -718,7 +719,7 @@ class OpenEndedModule(openendedchild.OpenEndedChild):
             score = self.latest_score()
             correct = 'correct' if self.is_submission_correct(score) else 'incorrect'
             if self.child_state == self.ASSESSING:
-                eta_string = "Your response has been submitted.  Please check back later for your grade."
+                eta_string = _("Your response has been submitted.  Please check back later for your grade.")
         else:
             post_assessment = ""
             correct = ""
