@@ -1053,7 +1053,11 @@ body.unit {
 
     .subsection,
     .courseware-unit {
-      margin: 0 0 ($baseline/10) ($baseline);
+      margin: ($baseline/4) 0 0 ($baseline);
+    }
+
+    .courseware-unit .section-item {
+      background-color: transparent;
     }
 
     .section-item {
@@ -1064,6 +1068,7 @@ body.unit {
       width: 100%;
       background: $gray-l5;
       padding: 6px 8px 8px 16px;
+      vertical-align: top;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
@@ -1105,8 +1110,6 @@ body.unit {
         content: "- private";
       }
     }
-
-
 
     .new-unit-item {
       @extend %ui-btn-flat-outline;

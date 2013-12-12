@@ -295,14 +295,13 @@
     .courseware-unit {
       @include font-size(13);
       @include clearfix();
-      margin-bottom: ($baseline/4);
+      padding: ($baseline/10) 0;
 
       .section-item {
         @include transition(background $tmg-avg ease-in-out 0);
         @include font-size(13);
         position: relative;
         display: block;
-        background-color: $gray-l5;
         padding: 6px 8px 8px 16px;
 
         &:hover {
