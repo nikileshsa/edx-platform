@@ -83,6 +83,7 @@ define ["js/views/overview", "js/views/feedback_notification", "sinon", "js/base
             )
     
         afterEach ->
+            @xhr.restore()
             delete window.analytics
             delete window.course_location_analytics
             @notificationSpy.reset()
@@ -328,19 +329,14 @@ define ["js/views/overview", "js/views/feedback_notification", "sinon", "js/base
                 )
                 expect($('#subsection-2')).not.toHaveClass('collapsed')
 
-        xdescribe "AJAX", ->
+        describe "AJAX", ->
             beforeEach ->
-                @requests = requests = []
-                @xhr = sinon.useFakeXMLHttpRequest()
-                @xhr.onCreate = (xhr) -> requests.push(xhr)
-
                 @savingSpies = spyOnConstructor(Notification, "Mini",
                     ["show", "hide"])
                 @savingSpies.show.andReturn(@savingSpies)
                 @clock = sinon.useFakeTimers()
 
             afterEach ->
-                @xhr.restore()
                 @clock.restore()
 
             it "should send an update on reorder", ->
