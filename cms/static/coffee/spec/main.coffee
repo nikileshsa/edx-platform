@@ -179,8 +179,6 @@ requirejs.config({
 jasmine.getFixtures().fixturesPath += 'coffee/fixtures'
 
 define([
-    "coffee/spec/main_spec",
-
     "coffee/spec/models/course_spec", "coffee/spec/models/metadata_spec",
     "coffee/spec/models/section_spec",
     "coffee/spec/models/settings_course_grader_spec",
@@ -198,7 +196,9 @@ define([
     "js/spec/transcripts/file_uploader_spec",
 
     "js/spec/utils/module_spec",
-    "js/spec/models/explicit_url_spec"
+    "js/spec/models/explicit_url_spec",
+
+    "coffee/spec/main_spec"
 
     # these tests are run separate in the cms-squire suite, due to process
     # isolation issues with Squire.js
