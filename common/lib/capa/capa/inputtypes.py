@@ -476,7 +476,8 @@ class JSInput(InputTypeBase):
                  height="500"
                  width="400"/>
 
-    See the documentation in the /doc/public folder for more information.
+    See the documentation in the docs/data/source/course_data_formats folder for
+    more information.
     """
 
     template = "jsinput.html"
@@ -503,7 +504,9 @@ class JSInput(InputTypeBase):
 
     def _extra_context(self):
         context = {
-            'applet_loader': '{static_url}js/capa/src/jsinput.js'.format(
+            'jschannel_loader': '{static_url}js/capa/src/jschannel.js'.format(
+                static_url=self.system.STATIC_URL),
+            'jsinput_loader': '{static_url}js/capa/src/jsinput.js'.format(
                 static_url=self.system.STATIC_URL),
             'saved_state': self.value
         }
